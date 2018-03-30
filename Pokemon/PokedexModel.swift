@@ -18,7 +18,7 @@ class PokedexModel {
         // Actually "execute" the task. This is the line that actually makes the request that we set up above
         task.resume()
     }
-    static func getSprite(url: URL, completionHandler:@escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
+    static func getPokemon(url: URL, completionHandler:@escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
         // Specify the url that we will be sending the GET Request to
         // Create a URLSession to handle the request tasks
         let session = URLSession.shared

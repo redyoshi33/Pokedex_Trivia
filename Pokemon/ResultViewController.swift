@@ -12,50 +12,45 @@ class ResultViewController: UIViewController {
 
     @IBOutlet weak var spriteImageView: UIImageView!
     @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var leftLabel: UILabel!
+    @IBOutlet weak var rightLabel: UILabel!
+    
     var delegate: AnswerDelegate?
     var pokename: String?
     var score = ""
-    var pokemon = ""
-    var pokeurl = ""
-    var sprite = ""
+//    var pokemon = ""
+    var pokesprite: UIImage?
     
-    @IBAction func playagainButtonPress(_ sender: UIButton) {
+    @IBAction func continueButtonPress(_ sender: UIButton) {
         delegate?.cancelResultViewController(self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(pokeurl)
+        
+        rightLabel.clipsToBounds = true
+        rightLabel.layer.cornerRadius = 5
+        rightLabel.layer.maskedCorners = [.layerMaxXMaxYCorner]
+        
+        leftLabel.clipsToBounds = true
+        leftLabel.layer.cornerRadius = 5
+        leftLabel.layer.maskedCorners = [.layerMinXMaxYCorner]
+        
+        resultLabel.clipsToBounds = true
+        resultLabel.layer.cornerRadius = 5
+        resultLabel.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+
+        continueButton.clipsToBounds = true
+        continueButton.layer.cornerRadius = 5
+        
+        spriteImageView.image = pokesprite
         if let pokemon = pokename {
-            resultLabel.text = "Correct! it was \(pokemon). You have a score of \(score)."
+            resultLabel.text = "Correct! it was \(pokemon)!"
         }
-        PokedexModel.getSprite(url: URL(string:pokeurl)!, completionHandler: {
-            data, response, error in
-            do {
-                print("grabbing json")
-                // Try converting the JSON object to "Foundation Types" (NSDictionary, NSArray, NSString, etc.)
-                if let jsonResult = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary {
-                    DispatchQueue.main.async {
-                        if var spritedict = jsonResult["sprites"] as? NSDictionary{
-                            if let spriteurl = spritedict["front_default"] as? String{
-                                self.sprite = spriteurl
-                                if let data = try? Data(contentsOf: URL(string:self.sprite)!)
-                                {
-                                    if let image = UIImage(data: data) as? UIImage{
-                                        self.spriteImageView.image = image
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                
-            } catch {
-                print("Something went wrong")
-            }
-        })
+        scoreLabel.text = score
         // Do any additional setup after loading the view.
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
