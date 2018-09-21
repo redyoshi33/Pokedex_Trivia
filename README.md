@@ -1,5 +1,5 @@
 # Pokedex_Trivia
-<p><u>Demo</u>: <a class='link' href='https://www.youtube.com/WWDErN6LTsM' target="_blank">youtube.com/WWDErN6LTsM</a></p>
+<p><u>Demo</u>: <a class='link' href='https://www.youtube.com/embed/WWDErN6LTsM' target="_blank">youtube.com/embed/WWDErN6LTsM</a></p>
 <p><u>Technologies</u>: Swift, Pokemon API, Core Data, AV Foundation </p>
 <p><u>Role</u>: Worked independently, built the UI and the logic, fetching data through API calls.</p>
 <p><u>Description</u>: The goal of the Pokedex Trivia iOS application is to guess the Pokemon based on a random description. This project was built using Swift and uses the Pokemon API, Core Data, and AV Foundation. The Pokemon API contains the name and description of each Pokemon along with an image of the Pokemon, Core Data allows for a local high score board, and AV Foundation adds sounds for correct and wrong answers. A random number is generated and is used to pull JSON data from the Pokemon API.</p>
